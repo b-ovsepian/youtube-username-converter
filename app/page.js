@@ -56,17 +56,17 @@ export default function Home() {
   };
 
   const exportCSV = () => {
-    results.unshift({ index: "Index", channel: "Channel", id: "Channel ID" });
-
-    const csv = results
+    let csv = results
       .map((result) => {
-        `${result.index},${result.channel},${
+        return `${result.index},${result.channel},${
           result.id !== "Not found"
             ? "https://www.youtube.com/channel/" + result.id
             : result.id
         }`;
       })
       .join("\n");
+
+    csv = "Index,Channel,Channel ID\n" + csv;
 
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
@@ -75,6 +75,7 @@ export default function Home() {
     link.setAttribute("download", "YouTube_Channel_ID_Finder.csv");
     link.textContent = "Export CSV";
     link.click();
+    toast.success("Exported CSV");
   };
 
   const faq = [
