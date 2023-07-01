@@ -40,18 +40,8 @@ export default function Home() {
           toast.error(`Could not find channel ${channel}`);
           return { index: index + 1, channel, id: "Not found" };
         }
-
         const { channels: id } = await response.json();
-        let channelId = id;
-
-        if (id.length > 1) {
-          toast.error(
-            `Found ${id.length} channels for ${channel}. Using first result.`
-          );
-          channelId = id[0];
-        }
-
-        return { index: index + 1, channel, id: channelId };
+        return { index: index + 1, channel, id };
       })
     );
 
@@ -168,6 +158,8 @@ export default function Home() {
               <a
                 href="https://developers.google.com/youtube/v3"
                 className="text-sm font-semibold leading-6 text-gray-900"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
               >
                 Learn more <span aria-hidden="true">→</span>
               </a>

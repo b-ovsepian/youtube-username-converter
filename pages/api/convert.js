@@ -4,7 +4,7 @@ import NextCors from "nextjs-cors";
 export default async function handler(req, res) {
   await NextCors(req, res, {
     methods: ["GET"],
-    origin: "localhost:3000",
+    origin: "https://youtube-username-converter.vercel.app/",
     optionsSuccessStatus: 200,
   });
 
@@ -47,9 +47,10 @@ export default async function handler(req, res) {
     const { data } = await axios.get(URL, {
       params: {
         part: "id",
-        maxResults: 20,
+        maxResults: 1,
         q: username,
         key: API_KEY,
+        type: "channel",
       },
     });
 
